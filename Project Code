@@ -1,1 +1,60 @@
 Plushy Shop Project:
+
+balance = 1000
+loop = True
+I = 0
+
+while loop == True:
+    print("Pick a Role: ")
+    print("a. Seller")
+    print("b. Buyer")
+    print("c. Exit")
+    role = input("Input: ")
+
+    if role == 'a':
+        # seller stuff
+        print("----[SELLER MENU]----")
+        print("Inventory: ", I)
+        print("a. Add/make a product")
+        print("b. Open inventory")
+        print("c. Exit")
+        choice = input("Choose: ")
+
+        if choice == 'a':
+            print("----[TOY MAKER]----")
+            tname = input("Enter a toy name: ")
+            tprice = input("Enter price: ")
+            tstock = input("Enter quantity: ")
+            print("(OPTIONS)")
+            print("a. done")
+            print("b. cancel/exit")
+            choice = input("Options: ")
+            if choice == 'a':
+                I += 1
+                print("Added", tname, "to inventory")
+            elif choice == 'b':   
+            elif choice == 'c':
+                break
+               
+    elif role == 'b':
+        print("----[SHOP]----")
+        print(f"Balance: ", balance)
+        print("a. Buy Products")
+        print("b. Return to Main Menu")
+        choice = input("Input: ")
+        if choice == 'a':
+            print("Products from the seller bla bla bla")
+        elif choice == 'b':
+            break
+
+    elif role == 'c':
+        print("Code exited")
+        break
+
+    else:
+        print("Invalid Input")
+        continue
+
+
+
+   #Work in progress
