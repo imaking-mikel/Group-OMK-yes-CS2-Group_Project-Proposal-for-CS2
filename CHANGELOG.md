@@ -7,3 +7,5 @@ This file lists all the updates made to our CS Plushy Shop project.
 -18/09/2026 added - code for project.
 
 -19/09/2026 - 9:52 AM - finalized seller part for project
+
+-19/09/2026 - 2:51 PM - Finalized all parts of project
