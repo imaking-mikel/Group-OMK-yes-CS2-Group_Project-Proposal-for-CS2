@@ -1,11 +1,15 @@
 Plushy Shop Project:
 
+from colorama import init, Fore
+init(autoreset=True)
+
 balance = 1000
 loop = True
 I = {}
 toy = 0
 
 while loop == True:
+    print("\033[H\033[J", end="")
     print("Pick a Role: ")
     print("a. Seller")
     print("b. Buyer")
@@ -13,6 +17,7 @@ while loop == True:
     role = input("Input: ")
 
     if role == 'a':
+        print("\033[H\033[J", end="")
         print("----[SELLER MENU]----")
         print("[INVENTORY]: ")
         total_stock = sum(info["stock"] for info in I.values())
@@ -23,13 +28,14 @@ while loop == True:
             print("Toy Name:", name)
             print("Price:", info["price"])
             print("Toy Stock:", info["stock"])
-        print("--------------------")    
+        print("--------------------")
         print("Choices: ")
         print("a. Add/make a product")
         print("b. Exit to Main Menu")
         choice = input("Choose: ")
 
         if choice == 'a':
+            print("\033[H\033[J", end="")
             print("----[TOY MAKER]----")
             tname = input("Enter a toy name: ")
             while True:
@@ -37,40 +43,44 @@ while loop == True:
                     tprice = int(input("Enter price: "))
                     break
                 except ValueError:
-                    print("ERROR MUST INPUT A NUMBER")
+                    print(Fore.RED + "ERROR MUST INPUT A NUMBER")
             while True:
                 try:
                     tstock = int(input("Enter quantity: "))
                     break
                 except ValueError:
-                    print("ERROR MUST INPUT A NUMBER")
+                    print(Fore.RED + "ERROR MUST INPUT A NUMBER")
 
             while True:
-                print("(OPTIONS)")
-                print("a. done")
-                print("b. stop")
+                print("\n(OPTIONS)")
+                print("a. Save and return to menu")
+                print("b. Cancel / Exit")
                 choice = input("Options: ")
                 if choice == 'a':
+                    print("\033[H\033[J", end="")
                     if tname in I:
-                        I[tname]["price"] = tprice        
-                        I[tname]["stock"] += tstock        
-                        print("----[Updated stock and price for: ", tname, "]----")
+                        I[tname]["price"] = tprice
+                        I[tname]["stock"] += tstock
+                        print(f"----[Updated stock and price for: {tname}]----")
                     else:
-                        I[tname] = {"price": tprice, "stock": tstock} 
-                        print("[----Added", tname, "to inventory]----")
+                        I[tname] = {"price": tprice, "stock": tstock}
+                        print(f"[----Added {tname} to inventory----]")
                         toy += 1
+                    enter = input("Hit Enter to Continue")
                     break
-                elif choice == 'b':    
+                elif choice == 'b':
                     break
                 else:
-                    print("Invalid option. Please choose 'a' or 'b'.")
+                    print(Fore.RED + "Invalid option. Please choose 'a' or 'b'.")
 
         elif choice == 'b':
-            continue  
+            continue
         else:
-            print("Invalid Choice!")
+            print(Fore.RED + "Invalid Choice!")
+            enter = input("Hit Enter to Continue")
 
     elif role == 'b':
+        print("\033[H\033[J", end="")
         print("----[SHOP]----")
         print("Balance:", balance)
         print("a. Buy Products")
@@ -78,11 +88,13 @@ while loop == True:
         choice = input("Input: ")
 
         if choice == 'a':
+            print("\033[H\033[J", end="")
             total_stock = sum(info["stock"] for info in I.values())
             if total_stock == 0:
-                print("Nothing in stock")
+                print(Fore.RED + "Nothing in stock")
+                enter = input("Hit Enter to Continue")
             else:
-                print("\n----[AVAILABLE PRODUCTS]----")
+                print("----[AVAILABLE PRODUCTS]----")
                 for name, info in I.items():
                     print("Toy Name:", name)
                     print("Price:", info["price"])
@@ -96,30 +108,34 @@ while loop == True:
                     stock = I[buy]["stock"]
 
                     if stock <= 0:
-                        print("Toy is out of stock")
+                        print(Fore.RED + "Toy is out of stock")
+                        enter = input("Hit Enter to Continue")
                     elif balance < price:
-                        print("Not enough balance to buy this toy")
+                        print(Fore.RED + "Not enough balance to buy this toy")
+                        enter = input("Hit Enter to Continue")
                     else:
+                        print("\033[H\033[J", end="")
                         balance -= price
                         I[buy]["stock"] -= 1
                         print(f"Successfully bought {buy} for ${price}")
                         print(f"Remaining Balance: ${balance}")
+                        enter = input("Hit Enter to Continue")
                 else:
-                    print("Toy not found in shop")
+                    print(Fore.RED + "Toy not found in shop")
+                    enter = input("Hit Enter to Continue")
 
         elif choice == 'b':
-            continue  
+            continue
         else:
-            print("Invalid input")
+            print(Fore.RED + "Invalid input")
+            enter = input("Hit Enter to Continue")
 
     elif role == 'c':
-        print("Code exited")
+        print("\033[H\033[J", end="")
+        print(Fore.YELLOW + "\n                  Goodbye!")
         break
 
     else:
-        print("Invalid Input")
+        print(Fore.RED + "Invalid Input")
+        enter = input("Hit Enter to Continue")
         continue
-
-
-
-   #Work in progress?
