@@ -3,6 +3,7 @@ Plushy Shop Project:
 balance = 1000
 loop = True
 I = {}
+toy = 0
 
 while loop == True:
     print("Pick a Role: ")
@@ -12,14 +13,12 @@ while loop == True:
     role = input("Input: ")
 
     if role == 'a':
-        # seller stuff
         print("----[SELLER MENU]----")
         print("[INVENTORY]: ")
-# line 17 to 18 is gemini
         total_stock = sum(info["stock"] for info in I.values())
         print("Total Stock:", total_stock)
         print("--------------------")
-#line 21 to 24 is also gemini
+
         for name, info in I.items():
             print("Toy Name:", name)
             print("Price:", info["price"])
@@ -27,9 +26,9 @@ while loop == True:
         print("--------------------")    
         print("Choices: ")
         print("a. Add/make a product")
-        print("b. Exit")
+        print("b. Exit to Main Menu")
         choice = input("Choose: ")
-#I asked gemini what valueerror is
+
         if choice == 'a':
             print("----[TOY MAKER]----")
             tname = input("Enter a toy name: ")
@@ -45,27 +44,73 @@ while loop == True:
                     break
                 except ValueError:
                     print("ERROR MUST INPUT A NUMBER")
-            print("(OPTIONS)")
-            print("a. done")
-            print("b. stop")
-            choice = input("Options: ")
-            if choice == 'a':
-                I[tname] = {"price": tprice, "stock": tstock} 
-                print("[----Added", tname, "to inventory]----")
-                continue
-            elif choice == 'b':    
-                break
+
+            while True:
+                print("(OPTIONS)")
+                print("a. done")
+                print("b. stop")
+                choice = input("Options: ")
+                if choice == 'a':
+                    if tname in I:
+                        I[tname]["price"] = tprice        
+                        I[tname]["stock"] += tstock        
+                        print("----[Updated stock and price for: ", tname, "]----")
+                    else:
+                        I[tname] = {"price": tprice, "stock": tstock} 
+                        print("[----Added", tname, "to inventory]----")
+                        toy += 1
+                    break
+                elif choice == 'b':    
+                    break
+                else:
+                    print("Invalid option. Please choose 'a' or 'b'.")
+
+        elif choice == 'b':
+            continue  
+        else:
+            print("Invalid Choice!")
 
     elif role == 'b':
         print("----[SHOP]----")
-        print(f"Balance: ", balance)
+        print("Balance:", balance)
         print("a. Buy Products")
         print("b. Return to Main Menu")
         choice = input("Input: ")
+
         if choice == 'a':
-            print("Products from the seller bla bla bla")
+            total_stock = sum(info["stock"] for info in I.values())
+            if total_stock == 0:
+                print("Nothing in stock")
+            else:
+                print("\n----[AVAILABLE PRODUCTS]----")
+                for name, info in I.items():
+                    print("Toy Name:", name)
+                    print("Price:", info["price"])
+                    print("Stock:", info["stock"])
+                    print("--------------------")
+
+                buy = input("Enter the name of the toy to buy: ")
+
+                if buy in I:
+                    price = I[buy]["price"]
+                    stock = I[buy]["stock"]
+
+                    if stock <= 0:
+                        print("Toy is out of stock")
+                    elif balance < price:
+                        print("Not enough balance to buy this toy")
+                    else:
+                        balance -= price
+                        I[buy]["stock"] -= 1
+                        print(f"Successfully bought {buy} for ${price}")
+                        print(f"Remaining Balance: ${balance}")
+                else:
+                    print("Toy not found in shop")
+
         elif choice == 'b':
-            break
+            continue  
+        else:
+            print("Invalid input")
 
     elif role == 'c':
         print("Code exited")
@@ -77,4 +122,4 @@ while loop == True:
 
 
 
-   #Work in progress
+   #Work in progress?
