@@ -1,9 +1,14 @@
 # Plushy Shop Project
+
+------
 Overview/Description: This project is about selling plushy/toy versions of our classmates/batchmates.
+------
 
 Features: 
 You'll be able to choose between a seller or a buyer. If you chose a seller you can add different plushies of batch 2031 where you can set their price and sell them and even make new toys. 
 If you chose the buyer you would be able to buy the things the seller set up.
+
+-----
 
 How to Run / Requirements: Requires proper syntax, inputs, functions(?), conditions, loops etc.
 
@@ -83,15 +88,20 @@ Price:71
 
 Stock: 1
 
-Choose a product:                             )
+Choose a product:                             
 
 Balance: 1000
 
 
 
 
+-------
+
+
+
 Contributors: 
 
+--------
 
 Michael Rey G. Rosales
 
